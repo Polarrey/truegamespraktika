@@ -22,6 +22,8 @@ Route::get('/findus', function () {
 Route::get('/aboutus', function () {
     return view('aboutus');
 });
+Route::get('/catalog', [App\Http\Controllers\tovar::class, 'catalog']);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
