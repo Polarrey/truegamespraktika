@@ -15,13 +15,13 @@
                 </div>
             </div>
             @foreach ($product as $xyz)
-            <div class="card mb-3">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-4">
+            <div class="border mb-3">
+                <div class="">
+                    <div class="">
+                        <div class="">
                             <img src="{{ $xyz->img }}" class="d-block w-100 " alt="tovar">
                         </div>
-                        <div class="col-6">
+                        <div class="">
                             <h1>{{ $xyz->name }}</h1>
                             <h1>{{ $xyz->year }}</h1>
                             <h3>{{ $xyz->price }}</h3>

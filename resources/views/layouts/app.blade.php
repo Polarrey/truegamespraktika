@@ -7,8 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>True Games</title>
 
+    <link rel="icon" type="image/x-icon" href="/public/img/faviconka.png">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -30,7 +31,17 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
+                           <a href="{{url('/')}}"> О нас</a>
 
+                    </ul>
+
+                    <ul class="navbar-nav mx-auto">
+                        <a href="{{url('/catalog')}}"> Каталог</a>
+
+                    </ul>
+
+                    <ul class="navbar-nav ms-auto">
+                    <a href="{{url('/findus')}}">Где нас найти?</a>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -39,13 +50,13 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Войти') }}</a>
                                 </li>
                             @endif
 
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Зарегистрироваться') }}</a>
                                 </li>
                             @endif
                         @else
