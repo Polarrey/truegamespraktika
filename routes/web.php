@@ -22,7 +22,7 @@ Route::get('/', [App\Http\Controllers\tovar::class, 'aboutus']);  //Страни
 Route::get('/findus', function () { return view('findus');});   //Страница "Где нас найти?"
 Route::get('/catalog', [App\Http\Controllers\tovar::class, 'catalog']);  //Страница Каталог
 Route::get('/catalog/sort/{name}/{nap}',[App\Http\Controllers\tovar::class, 'catalog']); //Сортировка
-
+Route::get('/catalog/filter/{id}', [App\Http\Controllers\tovar::class, 'filter']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

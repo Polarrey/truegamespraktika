@@ -14,6 +14,27 @@
                     <a class="dropdown-item" href="{{url('/catalog/sort')}}/price/asc">По цене</a>
                 </div>
             </div>
+
+
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                Фильтры
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                @foreach($cat as $obcat)
+                    <li><a class="dropdown-item" href="{{url('/catalog/filter')}}/{{$obcat->id}}">{{$obcat->name}}</a>
+                    </li>
+                @endforeach
+                <li><a class="dropdown-item" href="{{url('/catalog')}}">сбросить фильтр</a></li>
+            </ul>
+        </div>
+
+
+
+
+    
             @foreach ($product as $xyz)
             <div class="border mb-3">
                 <div class="">

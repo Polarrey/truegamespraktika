@@ -13,16 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tovars', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('price');
-            $table->string('count');
-            $table->string('year');
-            $table->string('category');
-            $table->string('img');
-            $table->string('country');
-            $table->string('model');
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tovars');
+        Schema::dropIfExists('categories');
     }
 };
