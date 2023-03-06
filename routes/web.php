@@ -23,6 +23,8 @@ Route::get('/findus', function () { return view('findus');});   //Страниц
 Route::get('/catalog', [App\Http\Controllers\tovar::class, 'catalog']);  //Страница Каталог
 Route::get('/catalog/sort/{name}/{nap}',[App\Http\Controllers\tovar::class, 'catalog']); //Сортировка
 Route::get('/catalog/filter/{id}', [App\Http\Controllers\tovar::class, 'filter']);
+Route::get('/catalog/{id}', [App\Http\Controllers\tovar::class, 'category'])->name('category'); 
+Route::get('/catalog/singleproduct/{id}',[App\Http\Controllers\tovar::class, 'oneproduct']); // Отдельно товар
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

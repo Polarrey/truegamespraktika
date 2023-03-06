@@ -16,9 +16,18 @@ class tovar extends Controller
         $cat=\App\Models\category::all();
         return view ('catalog', ['product'=>$x]);
     }
-    public function filter($id){       //  Фильтрецкий
+    public function filter($id){       //  Фильтр (статик)
         $x =\App\Models\tovar::where('category', $id)->get();
         $cat=\App\Models\category::all();
         return view ('catalog', ['product'=>$x,'cat'=>$cat]);
+    }
+    public function category($id){       //  Категории товаров (Видеоигры, консоли и девайсы)
+        $x =\App\Models\tovar::where('count','>',0)->where('category_id',$id)->get();
+        $categories=\App\Models\category::all();
+        return view ('catalog', ['product'=>$x,'cat'=>$categories]);
+    }
+    public function oneproduct($id){   // Страница о нас "/"
+        $x=\App\Models\tovar::where('id', $id)->get();
+        return view ('singleproduct', ['product'=>$x]);
     }
 }

@@ -27,9 +27,19 @@
             </ul>
         </div>
 
+        <div class="btn-3">
+            <a href="{{url('/catalog/1')}}">Консоли</a>
+            <a href="{{url('/catalog/2')}}">Видеоигры</a>
+            <a href="{{url('/catalog/3')}}">Девайсы</a>
+        </div>
 
 
     
+
+
+
+
+
             @foreach ($product as $xyz)
             <div class="border mt-3 mb-3">
                 <div class="">
@@ -41,6 +51,10 @@
                             <h1>{{ $xyz->name }}</h1>
                             <h1>{{ $xyz->year }}</h1>
                             <h3>{{ $xyz->price }}</h3>
+                            @auth
+                            <button class="btn-3">
+                                <a href="{{url('/catalog/singleproduct')}}/{{$xyz->id}}">Купить</a></button>
+                            @endauth
 
                         </div>
                     </div>
