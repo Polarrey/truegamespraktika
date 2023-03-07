@@ -51,10 +51,22 @@
                             <h1>{{ $xyz->name }}</h1>
                             <h1>{{ $xyz->year }}</h1>
                             <h3>{{ $xyz->price }}</h3>
-                            @auth
+
+                            @if (Auth::user())
                             <button class="btn-3">
-                                <a href="{{url('/catalog/singleproduct')}}/{{$xyz->id}}">Купить</a></button>
-                            @endauth
+                                <a href="{{url('/catalog/singleproduct')}}/{{$xyz->id}}">О товаре</a></button>
+                    <a href="/public/addtocart/{{$xyz -> id}}" class="btn main-btn">Купить</a>
+                @else
+                <h1 class="no-auth">
+                    @if (Route::has('login'))
+                    <li class="nav-item">
+                        <a class="nav-link filter-link" href="{{ route('login') }}">Авторизоваться</a>
+                    </li>
+                @endif
+                </h1>
+                @endif
+
+
 
                         </div>
                     </div>
@@ -65,3 +77,6 @@
     </div>
 </div>
 @endsection
+
+
+

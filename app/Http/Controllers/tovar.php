@@ -30,4 +30,30 @@ class tovar extends Controller
         $x=\App\Models\tovar::where('id', $id)->get();
         return view ('singleproduct', ['product'=>$x]);
     }
+    
+
+    public function addtocart($id) {
+        $product = \App\Models\tovar::find($id);
+        $bufferif = \App\Models\Cart::Where('product_id', "=", $id) -> get();
+        $count = 1;
+        if ($bufferif -> count() == 0) {
+            $cart = new \App\Models\Cart();
+            $cart -> product_id = $product -> id;
+            $cart -> title = $product -> name;
+            $cart -> count = $count;
+            $cart -> price = $product -> price;
+            $cart -> photo = $product -> img;
+            $cart -> save();
+        }
+        else {
+            $bufferif[0] -> count++;
+            $bufferif[0] -> save();
+        }
+        return redirect('/catalog');
+    }
+
+    public function cart() {
+        $i = \App\Models\Cart::where('id', '>', 0) -> get();
+        return view('/cart', ["products" => $i]);
+    }
 }

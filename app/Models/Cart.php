@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class tovar extends Model
+class Cart extends Model
 {
-    public function Cart(){
-        return $this -> belongsTo(cart::class, 'product_id', 'id');
+    public function Product() {
+        return $this -> hasMany(product::class, 'product_id' , 'id');
     }
 }

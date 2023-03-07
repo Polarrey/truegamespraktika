@@ -24,7 +24,19 @@ Route::get('/catalog', [App\Http\Controllers\tovar::class, 'catalog']);  //Ст�
 Route::get('/catalog/sort/{name}/{nap}',[App\Http\Controllers\tovar::class, 'catalog']); //Сортировка
 Route::get('/catalog/filter/{id}', [App\Http\Controllers\tovar::class, 'filter']);
 Route::get('/catalog/{id}', [App\Http\Controllers\tovar::class, 'category'])->name('category'); 
-Route::get('/catalog/singleproduct/{id}',[App\Http\Controllers\tovar::class, 'oneproduct']); // Отдельно товар
+Route::get('/catalog/singleproduct/{id}',[App\Http\Controllers\tovar::class, 'oneproduct']); // Товар открывается отдельно
+
+
+
+Route::get('/addtocart/{id}', [App\Http\Controllers\tovar::class,'addtocart']);
+Route::get('/cart', [App\Http\Controllers\tovar::class,'cart']);
+Route::get('/cartadd/{id}', [App\Http\Controllers\CartController::class,'addbtn']);
+Route::get('/cartrem/{id}', [App\Http\Controllers\CartController::class,'removebtn']);
+Route::get('/cartall/{id}', [App\Http\Controllers\CartController::class,'removeall']);
+
+
+
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

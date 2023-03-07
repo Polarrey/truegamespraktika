@@ -14,8 +14,10 @@
                 </div>
                 <div class="">
                     <h1>{{ $xyz->name }}</h1>
+                    <h4>{{ $xyz->description }}</h4>
+                    <h3>{{ $xyz->price }} Рублей</h3>
+                    <h3>модель {{ $xyz->model }}</h3>
                     <h1>{{ $xyz->year }}</h1>
-                    <h3>{{ $xyz->price }}</h3>
                     @auth
                     <button class="btn-3">
                         <a href="{{url('/catalog/singleproduct')}}/{{$xyz->id}}">Купить</a></button>
