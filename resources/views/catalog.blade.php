@@ -51,7 +51,6 @@
                             <h1>{{ $xyz->name }}</h1>
                             <h1>{{ $xyz->year }}</h1>
                             <h3>{{ $xyz->price }}</h3>
-
                             @if (Auth::user())
                             <button class="btn-3">
                                 <a href="{{url('/catalog/singleproduct')}}/{{$xyz->id}}">О товаре</a></button>

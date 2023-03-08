@@ -44,9 +44,15 @@
                     <a href="{{url('/findus')}}">Где нас найти?</a>
                     </ul>
 
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto ">
                     <a href="{{url('/cart')}}">Корзина</a>
                     </ul>
+                    @if(!Auth::check() || !Auth::user()->isAdmin())
+                        @else
+                            <li class="navbar-nav ms-auto">
+                                <a class="nav-link" href="{{url('/admin')}}">Админ-панель</a>
+                            </li>
+                        @endif
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->

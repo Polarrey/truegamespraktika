@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\tovar;
+use App\Http\Controllers\adminpanel;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +28,17 @@ Route::get('/catalog/sort/{name}/{nap}',[App\Http\Controllers\tovar::class, 'cat
 Route::get('/catalog/filter/{id}', [App\Http\Controllers\tovar::class, 'filter']);
 Route::get('/catalog/{id}', [App\Http\Controllers\tovar::class, 'category'])->name('category'); 
 Route::get('/catalog/singleproduct/{id}',[App\Http\Controllers\tovar::class, 'oneproduct']); // Товар открывается отдельно
+
+
+
+Route::get('/admin',[adminpanel::class,'admin'])->name('admin')->middleware('adminer');//Админ панель
+Route::get('/admin/product',[adminpanel::class,'prod'])->middleware('adminer');//Форма создания товара
+Route::post('/admin/product/create',[adminpanel::class,'prodcreate'])->name('createprod'); // Отправка данных в базу данных
+Route::get('/admin/product/delete/{id}',[adminpanel::class,'proddel'])->middleware('adminer');//Удаление продукта из базы данных
+Route::get('/admin/category',function (){
+    return view('createcat');
+})->middleware('adminer');//Форма создания категорий
+Route::post('/admin/category/create',[adminpanel::class,'catcreate'])->name('createcat');
 
 
 
