@@ -2,30 +2,74 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\product;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    public function addbtn($id) {
-        $cart = \App\Models\Cart::Where('id', "=", $id) -> get();
-        $cart[0] -> count++;
-        $cart[0] -> save();
-        return redirect('/cart');
+    public function index()
+    {
+        $cart = session()->get('cart');
+        $total = $this->getTotal();
+        return view('cart.index', compact('cart', 'total'));
     }
-    public function removebtn($id) {
-        $cart = \App\Models\Cart::Where('id', "=", $id) -> get();
-        $cart[0] -> count--;
-        if ($cart[0]->count < 1) {
-            $cart[0] -> delete();
+
+    public function add(Request $request)
+    {
+        $product = Product::findOrFail($request->product_id);
+        session()->push('cart', [
+            'product_id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'quantity' => 1
+        ]);
+        return redirect()->back();
+    }
+
+    public function update(Request $request)
+    {
+        $cart = session()->get('cart');
+        $cart[$request->index]['quantity'] = $request->quantity;
+        session()->put('cart', $cart);
+        $total = $this->getTotal();
+        return view('cart.cart', compact('cart', 'total'));
+    }
+
+    public function remove(Request $request)
+    {
+        $cart = session()->get('cart');
+        unset($cart[$request->index]);
+        session()->put('cart', $cart);
+        $total = $this->getTotal();
+        return view('cart.cart', compact('cart', 'total'));
+    }
+
+    public function increment(Request $request)
+    {
+        $cart = session()->get('cart');
+        $cart[$request->index]['quantity']++;
+        session()->put('cart', $cart);
+        return redirect()->back();
+    }
+
+    public function decrement(Request $request)
+    {
+        $cart = session()->get('cart');
+        $cart[$request->index]['quantity']--;
+        if ($cart[$request->index]['quantity'] <= 0) {
+            unset($cart[$request->index]);
         }
-        else
-            $cart[0] -> save();
-        return redirect('/cart');
+        session()->put('cart', $cart);
+        return redirect()->back();
     }
-    public function removeall($id) {
-        $cart = \App\Models\Cart::find($id);
-        $cart -> delete();
-        // dd($cart);
-        return redirect('/cart');
+
+    private function getTotal()
+    {
+        $cart = session()->get('cart');
+        $total = 0;
+        foreach ($cart as $item) {
+            $total += $item['price'] * $item['quantity'];
+        }
+        return $total;
     }
 }

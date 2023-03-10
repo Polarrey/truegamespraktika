@@ -1,46 +1,56 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1 class="d-flex justify-content-center">Админ-панель</h1>
-    <h3 class="d-flex justify-content-center">Товар</h3>
-    <div class="container">
-        <div class="row">
-            <a href="{{url('/admin/product')}}" class="btn btn-info justify-content-center">Добавить товар</a>
-        </div>
-        @foreach($prod as $obprod)
-            <div class="row">
-                <div class="col">
-                    <h3>{{$obprod->name}}</h3>  <!-- тут назавние товара выводится из базы данных-->
-                </div>
-                <div class="col">
-                <a href="{{url('/admin/product/edit')}}/{{$obprod->id}}" class="btn btn-primary ">Редактировать</a>
-                    <!-- это кнопка отвечает за редактирования товара -->
-                </div>
-                <div class="col">
-                <a href="{{url('/admin/product/delete/')}}/{{$obprod->id}}" class="btn btn-danger">Удалить</a>
-                </div> <!-- это кнопка отвечает за удаление товара из базы данных -->
-
-            </div>
-        @endforeach
-    </div>
-    <h3 class=" d-flex justify-content-center">Категории </h3>
-    <div class="container">
-        <div class="row">
-            <a href="{{url('/admin/category')}}" class="btn btn-info justify-content-center">создать категорию</a>
-        </div>
-        @foreach($cat as $obcat)
-            <div class="row">
-                <div class="col">
-                    <h3>{{$obcat->name}}</h3>
-                </div>
-                <div class="col">
-                    <a href="{{url('/admin/category/edit')}}{{$obcat->id}}" class=" btn btn-primary">Редактировать</a>
-                </div>
-                <div class="col">
-                <a href="{{url('/admin/category/delete/')}}/{{$obcat->id}}" class="btn btn-danger">Удалить</a>
+<div class="container">
+    <h1 class="text-center mb-3">Админ панель</h1>
+    <h4 class="text-center">Редактирование товара</h4>
+    <a class="btn btn-info mb-3" href="{{url('/admin/product')}}" role="button">Добавить товар</a><!--Кнопка на создание товара-->
+    <div class="row row-cols-2">
+        @foreach ($prod as $pp) <!--вывод товара-->
+        <div class="col mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <img src="{{url('/img/tovary')}}/{{ $pp->img }}" class="d-block w-100 " alt="tovar"><!--вывод изображения товара с базы-->
+                        </div>
+                        <div class="col-4">
+                            <h1>{{ $pp->name }}</h1><!--вывод имени товара с базы-->
+                            <h3>{{ $pp->price }} &#8381</h3><!--вывод цены товара с базы-->
+                            <div class="">
+                                <a role="button" href="{{url('/admin/product/delete/')}}/{{$pp->id}}" class="btn btn-danger mx-1 mt-2">Удалить</a> <!--удалить товар-->
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <h5>Страна: {{ $pp->country }}</h5><!--вывод страны-производителя товара с базы-->
+                            <h5>Год: {{ $pp->year }}</h5><!--вывод года выпуска товара с базы-->
+                            <h5>Модель: {{ $pp->model }}</h5><!--вывод модель товара с базы-->
+                            <h5>Количество: {{ $pp->count }}</h5><!--вывод модель товара с базы-->
+                        </div>
+                    </div>
                 </div>
             </div>
+        </div>
         @endforeach
     </div>
+    <h4 class="text-center">Редактирование категории</h4>
+    <a class="btn btn-info mb-3" href="{{url('/admin/category')}}" role="button">Добавить категорию</a><!--Кнопка на добавление категории-->
+    <div class="row row-cols-2">
+        @foreach ($cat as $pp) <!--вывод категорий-->
+        <div class="col mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col">
+                            <h1>{{ $pp->name }}</h1><!--вывод имени товара с базы-->
 
+                            <a role="button" href="{{url('/admin/category/delete/')}}/{{$pp->id}}" class="btn btn-danger mx-1 mt-2">Удалить</a> <!--удалить товар-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    </div>
+</div>
 @endsection

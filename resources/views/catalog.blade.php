@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="dropdown mb-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="d-flex">
+                    <!--сортировка и фильтр-->
+                    <div class="d-flex mb-3 me-auto">
+                        <!--селектор с сортировкой-->
+                        <div class="dropdown mb-3">
                 <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Сортировка
                 </button>
@@ -14,68 +18,58 @@
                     <a class="dropdown-item" href="{{url('/catalog/sort')}}/price/asc">По цене</a>
                 </div>
             </div>
-
-
-
-        <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-                Фильтры
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="{{url('/catalog')}}">Сбросить фильтр</a></li>
-            </ul>
-        </div>
-
-        <div class="btn-3">
-            <a href="{{url('/catalog/1')}}">Консоли</a>
-            <a href="{{url('/catalog/2')}}">Видеоигры</a>
-            <a href="{{url('/catalog/3')}}">Девайсы</a>
-        </div>
-
-
-    
+                    <div class="mx-3">
+                        <!--Сброс по умолчанию-->
+                        <a class="btn btn-light" href="{{ url('/catalog') }}" role="button">По умолчанию</a>
+                    </div>
+                        <!--Список доступных категорий-->
+                        <ul >
+                            @foreach ($cat as $categorya)
+                                <li>
+                                    <a class="dropdown-item"
+                                        href="{{ url('/catalog/filter') }}/{{ $categorya->id }}">{{ $categorya->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
 
 
 
 
 
-            @foreach ($product as $xyz)
-            <div class="border mt-3 mb-3">
-                <div class="">
-                    <div class="">
-                        <div class="">
-                            <img src="{{ $xyz->img }}" class="d-block w-100 " alt="tovar">
-                        </div>
-                        <div class="">
-                            <h1>{{ $xyz->name }}</h1>
-                            <h1>{{ $xyz->year }}</h1>
-                            <h3>{{ $xyz->price }}</h3>
-                            @if (Auth::user())
-                            <button class="btn-3">
-                                <a href="{{url('/catalog/singleproduct')}}/{{$xyz->id}}">О товаре</a></button>
-                    <a href="/public/addtocart/{{$xyz -> id}}" class="btn main-btn">Купить</a>
-                @else
-                <h1 class="no-auth">
-                    @if (Route::has('login'))
-                    <li class="nav-item">
-                        <a class="nav-link filter-link" href="{{ route('login') }}">Авторизоваться</a>
-                    </li>
-                @endif
-                </h1>
-                @endif
 
-
-
+                </div>
+                @foreach ($product as $xyz)
+                    <!--вывод товара-->
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="{{ url('/img/tovary') }}/{{ $xyz->img }}" class="d-block w-100 "
+                                        alt="tovar">
+                                    <!--вывод изображения товара с базы-->
+                                </div>
+                                <div class="col-7">
+                                    <h1>{{ $xyz->name }}</h1>
+                                    <h3>{{ $xyz->price }} &#8381</h3>
+                                    <a href="{{ url('/catalog/tovar') }}/{{ $xyz->id }}"
+                                        class="btn btn-info">Подробнее</a>
+                                    @if (auth()->check())
+                                        @if ($xyz->count > 0)
+                                            <a href="{{ Route('cartmake', $xyz->id) }}" class="btn btn-success">Добавить
+                                                в корзину</a>
+                                        @else
+                                            <a class="btn btn-primary disabled" href="">НЕТ В НАЛИЧИИ</a>
+                                        @endif
+                                    @else
+                                        <a href="{{ url('/login') }}"class="btn btn-info">Авторизируйтесь</a>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endforeach
             </div>
-            @endforeach
         </div>
     </div>
-</div>
 @endsection
-
-
-

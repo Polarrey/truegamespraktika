@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Регистрация') }}</div>
+                <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -15,7 +15,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Имя') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus pattern="^[А-Яа-яЁё\s]+$">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" pattern="^[А-Яа-яЁё\s-]+$" required autocomplete="name" autofocus >
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -24,11 +24,12 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Фамилия') }}</label>
+                            <label for="surname" class="col-md-4 col-form-label text-md-end">{{ __('Фамилия') }}</label>
 
                             <div class="col-md-6">
-                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" required autocomplete="e" autofocus pattern="^[А-Яа-яЁё\s]+$">
+                                <input id="surname" type="text" class="form-control @error('surname') is-invalid @enderror" name="surname" value="{{ old('surname') }}" pattern="^[А-Яа-яЁё\s-]+$"  required autocomplete="surname" autofocus>
 
                                 @error('surname')
                                     <span class="invalid-feedback" role="alert">
@@ -37,11 +38,12 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Отчество') }}</label>
+                            <label for="patronymic" class="col-md-4 col-form-label text-md-end">{{ __('Отчество') }}</label>
 
                             <div class="col-md-6">
-                                <input id="patronymic" type="text" class="form-control @error('patronymic') is-invalid @enderror" name="patronymic" value="{{ old('patronymic') }}" autocomplete="patronymic" autofocus pattern="^[А-Яа-яЁё\s]+$">
+                                <input id="patronymic" type="text" class="form-control @error('patronymic') is-invalid @enderror" name="patronymic" value="{{ old('patronymic') }}" pattern="^[А-Яа-яЁё\s-]+$" autocomplete="patronymic" autofocus>
 
                                 @error('patronymic')
                                     <span class="invalid-feedback" role="alert">
@@ -50,11 +52,12 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Логин') }}</label>
+                            <label for="login" class="col-md-4 col-form-label text-md-end">{{ __('Логин') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" required  autocomplete="login" autofocus pattern="^[a-zA-Z0-9]+$">
+                                <input id="login" type="text" class="form-control @error('login') is-invalid @enderror" name="login" value="{{ old('login') }}" pattern="^[a-zA-Z-]+$"  required autocomplete="login" autofocus>
 
                                 @error('login')
                                     <span class="invalid-feedback" role="alert">
@@ -63,8 +66,9 @@
                                 @enderror
                             </div>
                         </div>
+
                         <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Адрес') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -100,22 +104,18 @@
                         </div>
 
                         <div class="row mb-3">
-                                <label for="rules" class="col-md-4 col-form-label text-md-end">{{ __('Я согласен с правилами регистрации') }}</label>
+                            <label for="rules" class="col-md-4 col-form-label text-md-end">{{ __('Правила') }}</label>
 
-                                <div class="col-md-6">
-                                    <input id="rules" type="checkbox" class="@error('email') is-invalid @enderror" name="rules" value="{{ old('rules') }}" required autocomplete="rules">
+                            <div class="col-md-6 mt-2">
+                                <input id="rules" type="checkbox" class=" @error('rules') is-invalid @enderror" name="rules" required autocomplete="rules">
 
-                                    @error('rules')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
                             </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Зарегистрироваться') }}
+                                    {{ __('Register') }}
                                 </button>
                             </div>
                         </div>

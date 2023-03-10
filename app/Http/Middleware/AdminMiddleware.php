@@ -17,11 +17,9 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-
-        if (!Auth::check() || !Auth::user()->isAdmin()) {
-            return redirect('/')->withErrors('You do not have permission to access this page.');
+        if (!Auth::check() || !Auth::user()->isAdmin()){
+            return redirect('/')->withErrors('йоу');
         }
         return $next($request);
     }
-
 }
