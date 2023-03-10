@@ -1,33 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <div class="row">
+<div class="container">
+    <div class="row">
 
-            <h1>Корзина</h1>
-
-            <div class="row row-cols-2">
+        <h1>Корзина</h1>
+        <div class="album py-5 bg-light">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                 @foreach ($cart_items as $item)
-                    <!--вывод товара-->
-                    <div class="col mb-3">
-                        <div class="card h-100">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <h1>{{ $item->prod->name }}</h1>
-                                        <!--вывод имени товара с базы-->
-                                        <h3>{{ $item->prod->price }} &#8381</h3>
-                                        <!--вывод цены товара с базы-->
-                                    </div>
-                                    <div class="col-6">
-                                        <a href="{{ route('cartdelete', $item->id) }}">Удалить</a>
-                                    </div>
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <img src="/public/img/{{$item->prod-> img}}" class="carding-img d-block w-100 " alt="tovar">
+                        <div class="card-body">
+                            <h1>{{ $item->prod->name }}</h1>
+                            <h3>{{ $item->prod->price }} &#8381</h3>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="{{ route('cartdelete', $item->id) }}">Удалить</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                 @endforeach
             </div>
         </div>
     </div>
+</div>
 @endsection

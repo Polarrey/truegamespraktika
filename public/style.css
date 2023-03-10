@@ -1,16 +1,42 @@
-.carousel-img {
-    /*высота картинки в слайдере*/
+.fixheight {  /*Картинка в слайдере одного размера*/
+
     height: 600px;
 }
 
-.name_tovar {
-    /*название товара в слайдере*/
-    color: #fff;
-    text-shadow: 1px 0 5px #000, /*тень справа*/
-        0 1px 5px #000, /*тень снизу*/
-        -1px 0 5px #000, /*тень слева*/
-        0 -1px 5px #000; /*тень сверху*/
-}
 img{
     border-radius: .375rem;
 }
+
+.carding-img{
+    height: 225px;
+    overflow-y: hidden;
+}
+.custom-text {
+    background-color: #111;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.3);
+  animation: fade-in 0.5s ease-in-out;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.carousel-item {
+    opacity: 0;
+    transition: opacity .6s ease-in-out;
+  }
+  
+  .carousel-item.active {
+    opacity: 1;
+  }

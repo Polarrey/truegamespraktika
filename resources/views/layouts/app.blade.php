@@ -9,16 +9,16 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="icon" type="image/x-icon" href="/public/img/faviconka.png">
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-
+    <script src="{{ asset('/myscript.js') }}" defer></script>
     <!-- CSS -->
-    <link rel="stylesheet" href="{{url('/')}}/style.css">
+    <link rel="stylesheet" href="{{url('/')}}/style.css">    <!--Подключение стиля для слайдера -->
 </head>
 
 <body>
@@ -67,7 +67,7 @@
 
                         @else
                         <li class="nav-item">
-                            <a class="nav-link" href="{{url('/admin')}}">Админка</a>
+                            <a class="nav-link" href="{{url('/admin')}}">Админ-панель</a>
                         </li>
                         @endif
                         <li class="nav-item">
@@ -81,7 +81,7 @@
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    {{ __('Выйти из аккаунта') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

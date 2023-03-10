@@ -6,25 +6,27 @@
 
 
     @foreach ($product as $xyz)
-    <div class="border mt-3 mb-3">
-        <div class="">
+    <div class="row">
+        <div class="col-md-6 mx-auto">
             <div class="">
-                <div class="">
-                    <img src="{{ url('/img/tovary') }}/{{ $xyz->img }}" class="d-block w-100 " alt="tovar">
+                <div class="img-fluid rounded">
+                    <img src="{{ url('/img/tovary') }}/{{ $xyz->img }}" class="d-block w-90 " alt="tovar">
                 </div>
                 <div class="">
-                    <h1>{{ $xyz->name }}</h1>
+                    <h1 class="fw-bold">{{ $xyz->name }}</h1>
                     <h4>{{ $xyz->description }}</h4>
-                    <h3>{{ $xyz->price }} Рублей</h3>
-                    <h3>модель {{ $xyz->model }}</h3>
-                    <h1>{{ $xyz->year }}</h1>
-                    @auth
-                    <a class="btn btn-info" href="{{ url('/cart/make') }}/{{ $xyz->id }}" role="button">В корзину
-                    </a>  <!-- норм кнопка -->
-                    <button class="btn-3">
-                        <a href="{{url('/catalog/singleproduct')}}/{{$xyz->id}}">Купить</a></button>
-                    @endauth
-
+                    <h3 class="border-inline">{{ $xyz->price }} Рублей</h3>
+                    <h4> Модель №{{ $xyz->model }}</h4>
+                    <h5>{{ $xyz->year }}</h5>
+                    @if (auth()->check())
+                    @if ($xyz->count > 0)
+                    <button type="button" class="btn btn-outline-primary"><a href="{{ Route('cartmake', $xyz->id) }}">В корзину</a></button>
+                    @else
+                    <a class="btn btn-primary disabled" href="">Отсутствует в наличии</a>
+                    @endif
+                    @else
+                    <button type="button" class="btn btn-outline-primary"><a href="{{ url('/login') }}">Авторизируйтесь</a>
+                        @endif
                 </div>
             </div>
         </div>
